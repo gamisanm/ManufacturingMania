@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 174910570}
   - component: {fileID: 174910569}
   m_Layer: 5
-  m_Name: Buy
+  m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +677,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 174910570}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 611457977}
+        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+        m_MethodName: SellWool
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &174910570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,7 +741,7 @@ GameObject:
   - component: {fileID: 185453262}
   - component: {fileID: 185453261}
   m_Layer: 5
-  m_Name: Upg
+  m_Name: Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1100,7 +1112,7 @@ GameObject:
   - component: {fileID: 211762888}
   - component: {fileID: 211762887}
   m_Layer: 5
-  m_Name: Buy
+  m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1170,7 +1182,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 211762888}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 611457977}
+        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+        m_MethodName: SellPaper
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &211762888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1985,7 +2009,7 @@ GameObject:
   - component: {fileID: 612690401}
   - component: {fileID: 612690400}
   m_Layer: 5
-  m_Name: Buy
+  m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2055,7 +2079,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 612690401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 611457977}
+        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+        m_MethodName: SellRope
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &612690401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2241,7 +2277,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Upgrade X2
+  m_Text: Sell X1
 --- !u!222 &643242401
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2869,7 +2905,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Upgrade X2
+  m_Text: Sell X1
 --- !u!222 &814189312
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2949,7 +2985,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Upgrade X2
+  m_Text: Sell X1
 --- !u!222 &817669187
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3052,7 +3088,7 @@ GameObject:
   - component: {fileID: 842118886}
   - component: {fileID: 842118885}
   m_Layer: 5
-  m_Name: Upg
+  m_Name: Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3321,7 +3357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Upgrade X2
+  m_Text: Sell X1
 --- !u!222 &860200683
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3846,7 +3882,7 @@ GameObject:
   - component: {fileID: 981441656}
   - component: {fileID: 981441655}
   m_Layer: 5
-  m_Name: Upg
+  m_Name: Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4490,7 +4526,7 @@ GameObject:
   - component: {fileID: 1161034975}
   - component: {fileID: 1161034974}
   m_Layer: 5
-  m_Name: Buy
+  m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4560,7 +4596,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1161034975}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 611457977}
+        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+        m_MethodName: SellWood
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1161034975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4839,7 +4887,7 @@ GameObject:
   - component: {fileID: 1206763591}
   - component: {fileID: 1206763590}
   m_Layer: 5
-  m_Name: Upg
+  m_Name: Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5440,7 +5488,7 @@ GameObject:
   - component: {fileID: 1463573702}
   - component: {fileID: 1463573701}
   m_Layer: 5
-  m_Name: Buy
+  m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5510,7 +5558,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1463573702}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 611457977}
+        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+        m_MethodName: SellLeather
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1463573702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5700,9 +5760,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Upgrade X2
-
-'
+  m_Text: Sell X1
 --- !u!222 &1501249295
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5911,7 +5969,7 @@ GameObject:
   - component: {fileID: 1576323175}
   - component: {fileID: 1576323174}
   m_Layer: 5
-  m_Name: Upg
+  m_Name: Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6435,7 +6493,7 @@ GameObject:
   - component: {fileID: 1762884737}
   - component: {fileID: 1762884736}
   m_Layer: 5
-  m_Name: Upg
+  m_Name: Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6982,7 +7040,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 259.5, y: -57.81082}
+  m_AnchoredPosition: {x: 259.5, y: -57.810833}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865724384
@@ -8032,7 +8090,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Upgrade X2
+  m_Text: Sell X1
 --- !u!222 &2099121212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8054,7 +8112,7 @@ GameObject:
   - component: {fileID: 2117901903}
   - component: {fileID: 2117901902}
   m_Layer: 5
-  m_Name: Buy
+  m_Name: Sell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8124,7 +8182,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2117901903}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 611457977}
+        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+        m_MethodName: SellPlanks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2117901903
 MonoBehaviour:
   m_ObjectHideFlags: 0

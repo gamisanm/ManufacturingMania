@@ -35,6 +35,14 @@ public class Manager : MonoBehaviour
     int costToBuyLeather = 200;
     int costToBuyRope = 50;
 
+    //SELL COST
+    int costToSellWood = 50;
+    int costToSellPaper = 150;
+    int costToSellWool = 200;
+    int costToSellPlanks = 500;
+    int costToSellLeather = 100;
+    int costToSellRope = 25;
+
 
     void Start()
     {
@@ -46,7 +54,7 @@ public class Manager : MonoBehaviour
         //CancelInvoke("AddLeather");
         //CancelInvoke("AddRope");
 
-        //SAVING PROGRESS
+        //LOAD PROGRESS
         coinBronze = PlayerPrefs.GetInt("coinBronze", coinBronze);
         coinSilver = PlayerPrefs.GetInt("coinSilver", coinSilver);
         coinGold = PlayerPrefs.GetInt("coinGold", coinGold);
@@ -71,7 +79,7 @@ public class Manager : MonoBehaviour
         RopeText.text = "" + Rope;
 
     }
-
+    //BUY ITEMS
     public void BuyWood()
     {
         if (coinBronze >= costToBuyWood)
@@ -132,6 +140,56 @@ public class Manager : MonoBehaviour
             InvokeRepeating("AddRope", 1.0f, 1.0f);
         }
     }
+    //SELL STORE
+    public void SellWood()
+    {
+        if (Wood >= 1 || Paper >= 1 || Wool >= 1 || Planks >= 1 || Leather >= 1 || Rope >= 1)
+        {
+            Wood--;
+            coinBronze += costToSellWood;
+        }
+    }
+    public void SellPaper()
+    {
+        if (Paper >= 1)
+        {
+            Paper--;
+            coinBronze += costToSellPaper;
+        }
+    }
+    public void SellWool()
+    {
+        if (Wool >= 1)
+        {
+            Wool--;
+            coinBronze += costToSellWool;
+        }
+    }
+    public void SellPlanks()
+    {
+        if (Planks >= 1)
+        {
+            Planks--;
+            coinBronze += costToSellPlanks;
+        }
+    }
+    public void SellLeather()
+    {
+        if (Planks >= 1)
+        {
+            Leather--;
+            coinBronze += costToSellLeather;
+        }
+    }
+    public void SellRope()
+    {
+        if (Rope >= 1)
+        {
+            Rope--;
+            coinBronze += costToSellRope;
+        }
+    }
+    //ADD ITEMS
     public void AddRope()
     {
         Rope++;
@@ -157,6 +215,7 @@ public class Manager : MonoBehaviour
         Wool++;
     }
 
+    //SAVE PROGRESS
     void OnApplicationQuit()
     {
         PlayerPrefs.SetInt("coinBronze", coinBronze);
