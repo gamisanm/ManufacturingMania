@@ -17,10 +17,11 @@ public class Manager : MonoBehaviour
     //ITEM
     public int Wood;
     public int Paper;
-    public int Planks;
     public int Wool;
     public int Leather;
     public int Rope;
+
+    public int Planks;
 
     //TEXT ITEM
     public Text WoodText;
@@ -29,6 +30,8 @@ public class Manager : MonoBehaviour
     public Text LeatherText;
     public Text RopeText;
 
+    public Text PlanksText;
+
     //COST
     int costToBuyWood = 100;
     int costToBuyPaper = 300;
@@ -36,12 +39,16 @@ public class Manager : MonoBehaviour
     int costToBuyLeather = 200;
     int costToBuyRope = 50;
 
+    int costToBuyPlanks = 800;
+
     //SELL COST
     int costToSellWood = 50;
     int costToSellPaper = 150;
     int costToSellWool = 200;
     int costToSellLeather = 100;
     int costToSellRope = 25;
+
+    int costToSellPlanks = 300;
 
     //Progress bar
 
@@ -60,6 +67,7 @@ public class Manager : MonoBehaviour
         Wool = PlayerPrefs.GetInt("Wool", Wool);
         Leather = PlayerPrefs.GetInt("Leather", Leather);
         Rope = PlayerPrefs.GetInt("Rope", Rope);
+        Planks = PlayerPrefs.GetInt("Planks", Planks);
     }
 
     void Update()
@@ -72,6 +80,7 @@ public class Manager : MonoBehaviour
         WoolText.text = "" + Wool;
         LeatherText.text = "" + Leather;
         RopeText.text = "" + Rope;
+        PlanksText.text = "" + Planks;
 
         for (int i = 0; i < displayText.Length; i++)
         {
@@ -101,6 +110,9 @@ public class Manager : MonoBehaviour
                     break;
                 case 7:
                     number = Rope;
+                    break;
+                case 8:
+                    number = Planks;
                     break;
             }
 
@@ -186,6 +198,17 @@ public class Manager : MonoBehaviour
             InvokeRepeating("AddRope", 1.0f, 1.0f);
         }
     }
+    public void BuyPlanks()
+    {
+        if (coinBronze > costToBuyPlanks)
+        {
+            coinBronze -= costToBuyPlanks;
+            PlanksText.text = "" + Planks;
+            Rope++;
+            CancelInvoke("AddPlanks");
+            InvokeRepeating("AddPlanks", 15.0f, 15.0f);
+        }
+    }
     //SELL STORE
     public void SellWood()
     {
@@ -227,6 +250,14 @@ public class Manager : MonoBehaviour
             coinBronze += costToSellRope;
         }
     }
+    public void SellPlanks()
+    {
+        if (Planks >= 1)
+        {
+            Planks--;
+            coinBronze += costToSellPlanks;
+        }
+    }
     //ADD ITEMS
     public void AddRope()
     {
@@ -247,6 +278,10 @@ public class Manager : MonoBehaviour
     public void AddWool()
     {
         Wool++;
+    }
+    public void AddPlanks()
+    {
+        Planks++;
     }
 
     //SELL MAX EQUELS
@@ -295,6 +330,15 @@ public class Manager : MonoBehaviour
             coinBronze += totalRope * costToSellRope;
         }
     }
+    public void SellMaxPlanks()
+    {
+        if (Planks > 0)
+        {
+            int totalPlanks = Planks;
+            Planks = 0;
+            coinBronze += totalPlanks * costToSellPlanks;
+        }
+    }
 
     //SAVE PROGRESS
     void OnApplicationQuit()
@@ -307,6 +351,7 @@ public class Manager : MonoBehaviour
         PlayerPrefs.SetInt("Wool", Wool);
         PlayerPrefs.SetInt("Leather", Leather);
         PlayerPrefs.SetInt("Rope", Rope);
+        PlayerPrefs.SetInt("Planks", Planks);
         PlayerPrefs.Save();
     }
 }
