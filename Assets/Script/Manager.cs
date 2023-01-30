@@ -204,7 +204,7 @@ public class Manager : MonoBehaviour
         {
             coinBronze -= costToBuyPlanks;
             PlanksText.text = "" + Planks;
-            Rope++;
+            Planks++;
             CancelInvoke("AddPlanks");
             InvokeRepeating("AddPlanks", 15.0f, 15.0f);
         }

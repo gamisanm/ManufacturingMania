@@ -1,2 +1,0 @@
-# ManufacturingMania
-My first Game
