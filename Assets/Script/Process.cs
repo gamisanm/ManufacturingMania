@@ -9,22 +9,22 @@ public class Process : MonoBehaviour
         manager = FindObjectOfType<Manager>();
     }
 
-    public void WoodToPlanks()
+    public void CoalToClear_coal()
     {
-        if (manager.Wood >= 15)
+        if (manager._coal >= 15)
         {
-            manager.Wood -= 15;
-            manager.Planks += 1;
+            manager._coal -= 15;
+            manager._coalClear += 1;
         }
     }
 
-    public void WoodToPlanksMAX()
+    public void CoalToClear_coalMAX()
     {
-        if (manager.Wood > 0)
+        if (manager._coal > 0)
         {
-            int totalPlanks = manager.Wood / 15;
-            manager.Planks += totalPlanks;
-            manager.Wood -= totalPlanks * 15;
+            int total_coal = manager._coal / 15;
+            manager._coalClear += total_coal;
+            manager._coal -= total_coal * 15;
         }
     }
 }

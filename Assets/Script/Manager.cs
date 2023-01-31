@@ -1,3 +1,4 @@
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,42 +16,54 @@ public class Manager : MonoBehaviour
     public Text goldText;
 
     //ITEM
-    public int Wood;
-    public int Paper;
-    public int Wool;
-    public int Leather;
-    public int Rope;
+    public int _stone;  
+    public int _coal;
+    public int _copper;
+    public int _silver;
+    public int _gold;
+    public int _zinc;
+    public int _obsidian;
 
-    public int Planks;
+    public int _coalClear;
+    public int _copperClear;
+    public int _silverClear;
+    public int _goldClear;
+    public int _zincClear;
 
     //TEXT ITEM
-    public Text WoodText;
-    public Text PaperText;
-    public Text WoolText;
-    public Text LeatherText;
-    public Text RopeText;
+    public Text _stoneText;
+    public Text _coalText;
+    public Text _copperText;
+    public Text _silverText;
+    public Text _goldText;
+    public Text _zincText;
+    public Text _obsidianText;
 
-    public Text PlanksText;
+    public Text _coalClearText;
+    public Text _copperClearText;
+    public Text _silverClearText;
+    public Text _goldClearText;
+    public Text _zincClearText;
+
 
     //COST
-    int costToBuyWood = 100;
-    int costToBuyPaper = 300;
-    int costToBuyWool = 400;
-    int costToBuyLeather = 200;
-    int costToBuyRope = 50;
+    int costToBuy_stone = 50;
+    int costToBuyP_coal = 150;
+    int costToBuy_copper = 200;
+    int costToBuy_silver = 200;
+    int costToBuy_gold = 800;
+    int costToBuy_zinc = 100;
+    int costToBuy_obsidian = 500;
 
-    int costToBuyPlanks = 800;
 
     //SELL COST
-    int costToSellWood = 50;
-    int costToSellPaper = 150;
-    int costToSellWool = 200;
-    int costToSellLeather = 100;
-    int costToSellRope = 25;
-
-    int costToSellPlanks = 300;
-
-    //Progress bar
+    int costToSell_stone = 25;
+    int costToSell_coal = 75;
+    int costToSell_copper = 100;
+    int costToSell_silver = 100;
+    int costToSell_gold = 400;
+    int costToSell_zinc = 50;
+    int costToSell_obsidian = 500;
 
 
     void Start()
@@ -62,12 +75,18 @@ public class Manager : MonoBehaviour
         coinBronze = PlayerPrefs.GetInt("coinBronze", coinBronze);
         coinSilver = PlayerPrefs.GetInt("coinSilver", coinSilver);
         coinGold = PlayerPrefs.GetInt("coinGold", coinGold);
-        Wood = PlayerPrefs.GetInt("Wood", Wood);
-        Paper = PlayerPrefs.GetInt("Paper", Paper);
-        Wool = PlayerPrefs.GetInt("Wool", Wool);
-        Leather = PlayerPrefs.GetInt("Leather", Leather);
-        Rope = PlayerPrefs.GetInt("Rope", Rope);
-        Planks = PlayerPrefs.GetInt("Planks", Planks);
+        _stone = PlayerPrefs.GetInt("_stone", _stone);
+        _coal = PlayerPrefs.GetInt("_coal", _coal);
+        _copper = PlayerPrefs.GetInt("_copper", _copper);
+        _silver = PlayerPrefs.GetInt("_silver", _silver);
+        _gold = PlayerPrefs.GetInt("_gold", _gold);
+        _zinc = PlayerPrefs.GetInt("_zinc", _zinc);
+        _coalClear = PlayerPrefs.GetInt("_coalClear", _coalClear);
+        _copperClear = PlayerPrefs.GetInt("_coalClear", _copperClear);
+        _silverClear = PlayerPrefs.GetInt("_silverClear", _silverClear);
+        _goldClear = PlayerPrefs.GetInt("_goldClear", _goldClear);
+        _zincClear = PlayerPrefs.GetInt("_zincClear", _zincClear);
+        _obsidian = PlayerPrefs.GetInt("_obsidian", _obsidian);
     }
 
     void Update()
@@ -75,12 +94,15 @@ public class Manager : MonoBehaviour
         bronzeText.text = "" + coinBronze;
         silverText.text = "" + coinSilver;
         goldText.text = "" + coinGold;
-        WoodText.text = "" + Wood;
-        PaperText.text = "" + Paper;
-        WoolText.text = "" + Wool;
-        LeatherText.text = "" + Leather;
-        RopeText.text = "" + Rope;
-        PlanksText.text = "" + Planks;
+
+        _stoneText.text = "" + _stoneText;
+        _coalText.text = "" + _coalText;
+        _copperText.text = "" + _copperText;
+        _silverText.text = "" + _silverText;
+        _goldText.text = "" + _goldText;
+        _zincText.text = "" + _zincText;
+        _coalClearText.text = "" + _coalClear;
+
 
         for (int i = 0; i < displayText.Length; i++)
         {
@@ -97,26 +119,44 @@ public class Manager : MonoBehaviour
                     number = coinGold;
                     break;
                 case 3:
-                    number = Wood;
+                    number = _stone;
                     break;
                 case 4:
-                    number = Paper;
+                    number = _coal;
                     break;
                 case 5:
-                    number = Wool;
+                    number = _copper;
                     break;
                 case 6:
-                    number = Leather;
+                    number = _silver;
                     break;
                 case 7:
-                    number = Rope;
+                    number = _gold;
                     break;
                 case 8:
-                    number = Planks;
+                    number = _zinc;
+                    break;
+                case 9:
+                    number = _coalClear;
+                    break;
+                case 10:
+                    number = _copperClear;
+                    break;
+                case 11:
+                    number = _silverClear;
+                    break;
+                case 12:
+                    number = _goldClear;
+                    break;
+                case 13:
+                    number = _zincClear;
+                    break;
+                case 14:
+                    number = _obsidian;
                     break;
             }
 
-            displayText[i].text = FormatNumber(number);
+    displayText[i].text = FormatNumber(number);
         }
     }
 
@@ -141,202 +181,202 @@ public class Manager : MonoBehaviour
     }
 
 
-    //BUY ITEMS
-    public void BuyWood()
+    //BUY
+    public void Buy_stone()
     {
-        if (coinBronze >= costToBuyWood)
+        if (coinBronze >= costToBuy_stone)
         {
-            coinBronze -= costToBuyWood;
-            WoodText.text = "" + Wood;
-            Wood++;
-            CancelInvoke("AddWood");
-            InvokeRepeating("AddWood", 2.0f, 2f);
+            coinBronze -= costToBuy_stone;
+            _stoneText.text = "" + _stone;
+            _stone++;
+            CancelInvoke("_stone");
+            InvokeRepeating("_stone", 2.0f, 2f);
         }
     }
-    public void BuyPaper()
+    public void Buy_coal()
     {
-        if (coinBronze > costToBuyPaper)
+        if (coinBronze > costToBuyP_coal)
         {
-            coinBronze -= costToBuyPaper;
-            PaperText.text = "" + Paper;
-            Paper++;
-            CancelInvoke("AddPaper");
-            InvokeRepeating("AddPaper", 3.0f, 3.0f);
+            coinBronze -= costToBuyP_coal;
+            _coalText.text = "" + _coal;
+            _coal++;
+            CancelInvoke("_coal");
+            InvokeRepeating("_coal", 5.0f, 5.0f);
         }
     }
-    public void BuyWool()
+    public void Buy_copper()
     {
-        if (coinBronze > costToBuyWool)
+        if (coinBronze > costToBuy_copper)
         {
-            coinBronze -= costToBuyWool;
-            WoolText.text = "" + Wool;
-            Wool++;
-            CancelInvoke("AddWool");
-            InvokeRepeating("AddWool", 1.0f, 1.0f);
+            coinBronze -= costToBuy_copper;
+            _copperText.text = "" + _copper;
+            _copper++;
+            CancelInvoke("_copper");
+            InvokeRepeating("_copper", 7.0f, 7.0f);
         }
     }
     
-    public void BuyLeather()
+    public void Buy_silver()
     {
-        if (coinBronze > costToBuyLeather)
+        if (coinBronze > costToBuy_silver)
         {
-            coinBronze -= costToBuyLeather;
-            LeatherText.text = "" + Leather;
-            Leather++;
-            CancelInvoke("AddLeather");
-            InvokeRepeating("AddLeather", 5.0f, 5.0f);
+            coinBronze -= costToBuy_silver;
+            _silverText.text = "" + _silver;
+            _silver++;
+            CancelInvoke("_silver");
+            InvokeRepeating("_silver", 6.0f, 6.0f);
         }
     }
-    public void BuyRope()
+    public void Buy_gold()
     {
-        if (coinBronze > costToBuyRope)
+        if (coinBronze > costToBuy_gold)
         {
-            coinBronze -= costToBuyRope;
-            RopeText.text = "" + Rope;
-            Rope++;
-            CancelInvoke("AddRope");
-            InvokeRepeating("AddRope", 1.0f, 1.0f);
+            coinBronze -= costToBuy_gold;
+            _goldText.text = "" + _gold;
+            _gold++;
+            CancelInvoke("_gold");
+            InvokeRepeating("_gold", 20.0f, 20.0f);
         }
     }
-    public void BuyPlanks()
+    public void Buy_zinc()
     {
-        if (coinBronze > costToBuyPlanks)
+        if (coinBronze > costToBuy_zinc)
         {
-            coinBronze -= costToBuyPlanks;
-            PlanksText.text = "" + Planks;
-            Planks++;
-            CancelInvoke("AddPlanks");
-            InvokeRepeating("AddPlanks", 15.0f, 15.0f);
+            coinBronze -= costToBuy_zinc;
+            _zincText.text = "" + _zinc;
+            _zinc++;
+            CancelInvoke("_zinc");
+            InvokeRepeating("_zinc", 9.0f, 9.0f);
         }
     }
     //SELL STORE
-    public void SellWood()
+    public void Sell_stone()
     {
-        if (Wood >= 1)
+        if (_stone >= 1)
         {
-            Wood--;
-            coinBronze += costToSellWood;
+            _stone--;
+            coinBronze += costToSell_stone;
         }
     }
-    public void SellPaper()
+    public void Sell_coal()
     {
-        if (Paper >= 1)
+        if (_coal >= 1)
         {
-            Paper--;
-            coinBronze += costToSellPaper;
+            _coal--;
+            coinBronze += costToSell_coal;
         }
     }
-    public void SellWool()
+    public void Sell_copper()
     {
-        if (Wool >= 1)
+        if (_copper >= 1)
         {
-            Wool--;
-            coinBronze += costToSellWool;
+            _copper--;
+            coinBronze += costToSell_copper;
         }
     }
-    public void SellLeather()
+    public void Sell_silver()
     {
-        if (Leather >= 1)
+        if (_silver >= 1)
         {
-            Leather--;
-            coinBronze += costToSellLeather;
+            _silver--;
+            coinBronze += costToSell_silver;
         }
     }
-    public void SellRope()
+    public void Sell_gold()
     {
-        if (Rope >= 1)
+        if (_gold >= 1)
         {
-            Rope--;
-            coinBronze += costToSellRope;
+            _gold--;
+            coinBronze += costToSell_gold;
         }
     }
-    public void SellPlanks()
+    public void Sell_zinc()
     {
-        if (Planks >= 1)
+        if (_zinc >= 1)
         {
-            Planks--;
-            coinBronze += costToSellPlanks;
+            _zinc--;
+            coinBronze += costToSell_zinc;
         }
     }
     //ADD ITEMS
-    public void AddRope()
+    public void Add_stone()
     {
-        Rope++;
+        _stone++;
     }
-    public void AddWood()
+    public void Add_coal()
     {
-        Wood++;
+        _coal++;
     }
-    public void AddPaper()
+    public void Add_copper()
     {
-        Paper++;
+        _copper++;
     }
-    public void AddLeather()
+    public void Add_silver()
     {
-        Leather++;
+        _silver++;
     }
-    public void AddWool()
+    public void Add_gold()
     {
-        Wool++;
+        _gold++;
     }
-    public void AddPlanks()
+    public void Add_zinc()
     {
-        Planks++;
+        _zinc++;
     }
 
     //SELL MAX EQUELS
-    public void SellMaxWood()
+    public void SellMax_stone()
     {
-        if (Wood > 0)
+        if (_stone > 0)
         {
-            int totalWood = Wood;
-            Wood = 0;
-            coinBronze += totalWood * costToSellWood;
+            int total_stone = _stone;
+            _stone = 0;
+            coinBronze += total_stone * costToSell_stone;
         }
     }
-    public void SellMaxPaper()
+    public void SellMax_coal()
     {
-        if (Paper > 0)
+        if (_coal > 0)
         {
-            int totalPaper = Paper;
-            Paper = 0;
-            coinBronze += totalPaper * costToSellPaper;
+            int total_coal = _coal;
+            _coal = 0;
+            coinBronze += total_coal * costToSell_coal;
         }
     }
-    public void SellMaxWool()
+    public void SellMax_copper()
     {
-        if (Wool > 0)
+        if (_copper > 0)
         {
-            int totalWool = Wool;
-            Wool = 0;
-            coinBronze += totalWool * costToSellWool;
+            int total_copper = _copper;
+            _copper = 0;
+            coinBronze += total_copper * costToSell_copper;
         }
     }
-    public void SellMaxLeather()
+    public void SellMax_silver()
     {
-        if (Leather > 0)
+        if (_silver > 0)
         {
-            int totalLeather = Leather;
-            Leather = 0;
-            coinBronze += totalLeather * costToSellLeather;
+            int total_silver = _silver;
+            _silver = 0;
+            coinBronze += total_silver * costToSell_silver;
         }
     }
-    public void SellMaxRope()
+    public void SellMax_gold()
     {
-        if (Rope > 0)
+        if (_gold > 0)
         {
-            int totalRope = Rope;
-            Rope = 0;
-            coinBronze += totalRope * costToSellRope;
+            int total_gold = _gold;
+            _gold = 0;
+            coinBronze += total_gold * costToSell_gold;
         }
     }
-    public void SellMaxPlanks()
+    public void SellMax_zinc()
     {
-        if (Planks > 0)
+        if (_zinc > 0)
         {
-            int totalPlanks = Planks;
-            Planks = 0;
-            coinBronze += totalPlanks * costToSellPlanks;
+            int total_zinc = _zinc;
+            _zinc = 0;
+            coinBronze += total_zinc * costToSell_zinc;
         }
     }
 
@@ -346,12 +386,18 @@ public class Manager : MonoBehaviour
         PlayerPrefs.SetInt("coinBronze", coinBronze);
         PlayerPrefs.SetInt("coinSilver", coinSilver);
         PlayerPrefs.SetInt("coinGold", coinGold);
-        PlayerPrefs.SetInt("Wood", Wood);
-        PlayerPrefs.SetInt("Paper", Paper);
-        PlayerPrefs.SetInt("Wool", Wool);
-        PlayerPrefs.SetInt("Leather", Leather);
-        PlayerPrefs.SetInt("Rope", Rope);
-        PlayerPrefs.SetInt("Planks", Planks);
+        PlayerPrefs.SetInt("_stone", _stone);
+        PlayerPrefs.SetInt("_coal", _coal);
+        PlayerPrefs.SetInt("_copper", _copper);
+        PlayerPrefs.SetInt("_silver", _silver);
+        PlayerPrefs.SetInt("_gold", _gold);
+        PlayerPrefs.SetInt("_zinc", _zinc);
+        PlayerPrefs.SetInt("_clearCoal", _coalClear);
+        PlayerPrefs.SetInt("_copperClear", _copperClear);
+        PlayerPrefs.SetInt("_silverClear", _silverClear);
+        PlayerPrefs.SetInt("_goldClear", _goldClear);
+        PlayerPrefs.SetInt("_zincClear", _zincClear);
+        PlayerPrefs.SetInt("_obsidian", _obsidian);
         PlayerPrefs.Save();
-    }
+}
 }
