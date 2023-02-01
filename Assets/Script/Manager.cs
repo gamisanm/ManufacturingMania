@@ -1,4 +1,3 @@
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +21,6 @@ public class Manager : MonoBehaviour
     public int _silver;
     public int _gold;
     public int _zinc;
-    public int _obsidian;
 
     public int _coalClear;
     public int _copperClear;
@@ -37,7 +35,6 @@ public class Manager : MonoBehaviour
     public Text _silverText;
     public Text _goldText;
     public Text _zincText;
-    public Text _obsidianText;
 
     public Text _coalClearText;
     public Text _copperClearText;
@@ -53,7 +50,6 @@ public class Manager : MonoBehaviour
     int costToBuy_silver = 200;
     int costToBuy_gold = 800;
     int costToBuy_zinc = 100;
-    int costToBuy_obsidian = 500;
 
 
     //SELL COST
@@ -63,12 +59,11 @@ public class Manager : MonoBehaviour
     int costToSell_silver = 100;
     int costToSell_gold = 400;
     int costToSell_zinc = 50;
-    int costToSell_obsidian = 500;
 
 
     void Start()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         
 
         //LOAD PROGRESS
@@ -86,7 +81,25 @@ public class Manager : MonoBehaviour
         _silverClear = PlayerPrefs.GetInt("_silverClear", _silverClear);
         _goldClear = PlayerPrefs.GetInt("_goldClear", _goldClear);
         _zincClear = PlayerPrefs.GetInt("_zincClear", _zincClear);
-        _obsidian = PlayerPrefs.GetInt("_obsidian", _obsidian);
+    }
+    //SAVE PROGRESS
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("coinBronze", coinBronze);
+        PlayerPrefs.SetInt("coinSilver", coinSilver);
+        PlayerPrefs.SetInt("coinGold", coinGold);
+        PlayerPrefs.SetInt("_stone", _stone);
+        PlayerPrefs.SetInt("_coal", _coal);
+        PlayerPrefs.SetInt("_copper", _copper);
+        PlayerPrefs.SetInt("_silver", _silver);
+        PlayerPrefs.SetInt("_gold", _gold);
+        PlayerPrefs.SetInt("_zinc", _zinc);
+        PlayerPrefs.SetInt("_clearCoal", _coalClear);
+        PlayerPrefs.SetInt("_copperClear", _copperClear);
+        PlayerPrefs.SetInt("_silverClear", _silverClear);
+        PlayerPrefs.SetInt("_goldClear", _goldClear);
+        PlayerPrefs.SetInt("_zincClear", _zincClear);
+        PlayerPrefs.Save();
     }
 
     void Update()
@@ -151,9 +164,6 @@ public class Manager : MonoBehaviour
                 case 13:
                     number = _zincClear;
                     break;
-                case 14:
-                    number = _obsidian;
-                    break;
             }
 
     displayText[i].text = FormatNumber(number);
@@ -180,124 +190,74 @@ public class Manager : MonoBehaviour
         }
     }
 
-
     //BUY
-    public void Buy_stone()
+    public void BuyResource(string resourceType)
     {
-        if (coinBronze >= costToBuy_stone)
+        switch (resourceType)
         {
-            coinBronze -= costToBuy_stone;
-            _stoneText.text = "" + _stone;
-            _stone++;
-            CancelInvoke("_stone");
-            InvokeRepeating("_stone", 2.0f, 2f);
+            case "stone":
+                if (coinBronze >= costToBuy_stone)
+                {
+                    coinBronze -= costToBuy_stone;
+                    _stoneText.text = "" + _stone;
+                    _stone++;
+                    CancelInvoke("Add_stone");
+                    InvokeRepeating("Add_stone", 2.0f, 2f);
+                }
+                break;
+            case "coal":
+                if (coinBronze > costToBuyP_coal)
+                {
+                    coinBronze -= costToBuyP_coal;
+                    _coalText.text = "" + _coal;
+                    _coal++;
+                    CancelInvoke("Add_coal");
+                    InvokeRepeating("Add_coal", 5.0f, 5.0f);
+                }
+                break;
+            case "copper":
+                if (coinBronze > costToBuy_copper)
+                {
+                    coinBronze -= costToBuy_copper;
+                    _copperText.text = "" + _copper;
+                    _copper++;
+                    CancelInvoke("Add_copper");
+                    InvokeRepeating("Add_copper", 7.0f, 7.0f);
+                }
+                break;
+            case "silver":
+                if (coinBronze > costToBuy_silver)
+                {
+                    coinBronze -= costToBuy_silver;
+                    _silverText.text = "" + _silver;
+                    _silver++;
+                    CancelInvoke("Add_silver");
+                    InvokeRepeating("Add_silver", 6.0f, 6.0f);
+                }
+                break;
+            case "gold":
+                if (coinBronze > costToBuy_gold)
+                {
+                    coinBronze -= costToBuy_gold;
+                    _goldText.text = "" + _gold;
+                    _gold++;
+                    CancelInvoke("Add_gold");
+                    InvokeRepeating("Add_gold", 20.0f, 20.0f);
+                }
+                break;
+            case "zinc":
+                if (coinBronze > costToBuy_zinc)
+                {
+                    coinBronze -= costToBuy_zinc;
+                    _zincText.text = "" + _zinc;
+                    _zinc++;
+                    CancelInvoke("Add_zinc");
+                    InvokeRepeating("Add_zinc", 9.0f, 9.0f);
+                }
+                break;
         }
     }
-    public void Buy_coal()
-    {
-        if (coinBronze > costToBuyP_coal)
-        {
-            coinBronze -= costToBuyP_coal;
-            _coalText.text = "" + _coal;
-            _coal++;
-            CancelInvoke("_coal");
-            InvokeRepeating("_coal", 5.0f, 5.0f);
-        }
-    }
-    public void Buy_copper()
-    {
-        if (coinBronze > costToBuy_copper)
-        {
-            coinBronze -= costToBuy_copper;
-            _copperText.text = "" + _copper;
-            _copper++;
-            CancelInvoke("_copper");
-            InvokeRepeating("_copper", 7.0f, 7.0f);
-        }
-    }
-    
-    public void Buy_silver()
-    {
-        if (coinBronze > costToBuy_silver)
-        {
-            coinBronze -= costToBuy_silver;
-            _silverText.text = "" + _silver;
-            _silver++;
-            CancelInvoke("_silver");
-            InvokeRepeating("_silver", 6.0f, 6.0f);
-        }
-    }
-    public void Buy_gold()
-    {
-        if (coinBronze > costToBuy_gold)
-        {
-            coinBronze -= costToBuy_gold;
-            _goldText.text = "" + _gold;
-            _gold++;
-            CancelInvoke("_gold");
-            InvokeRepeating("_gold", 20.0f, 20.0f);
-        }
-    }
-    public void Buy_zinc()
-    {
-        if (coinBronze > costToBuy_zinc)
-        {
-            coinBronze -= costToBuy_zinc;
-            _zincText.text = "" + _zinc;
-            _zinc++;
-            CancelInvoke("_zinc");
-            InvokeRepeating("_zinc", 9.0f, 9.0f);
-        }
-    }
-    //SELL STORE
-    public void Sell_stone()
-    {
-        if (_stone >= 1)
-        {
-            _stone--;
-            coinBronze += costToSell_stone;
-        }
-    }
-    public void Sell_coal()
-    {
-        if (_coal >= 1)
-        {
-            _coal--;
-            coinBronze += costToSell_coal;
-        }
-    }
-    public void Sell_copper()
-    {
-        if (_copper >= 1)
-        {
-            _copper--;
-            coinBronze += costToSell_copper;
-        }
-    }
-    public void Sell_silver()
-    {
-        if (_silver >= 1)
-        {
-            _silver--;
-            coinBronze += costToSell_silver;
-        }
-    }
-    public void Sell_gold()
-    {
-        if (_gold >= 1)
-        {
-            _gold--;
-            coinBronze += costToSell_gold;
-        }
-    }
-    public void Sell_zinc()
-    {
-        if (_zinc >= 1)
-        {
-            _zinc--;
-            coinBronze += costToSell_zinc;
-        }
-    }
+
     //ADD ITEMS
     public void Add_stone()
     {
@@ -324,80 +284,111 @@ public class Manager : MonoBehaviour
         _zinc++;
     }
 
-    //SELL MAX EQUELS
-    public void SellMax_stone()
+    //SELL ONE
+    public void Sell(string resource)
     {
-        if (_stone > 0)
+        switch (resource)
         {
-            int total_stone = _stone;
-            _stone = 0;
-            coinBronze += total_stone * costToSell_stone;
+            case "stone":
+                if (_stone >= 1)
+                {
+                    _stone--;
+                    coinBronze += costToSell_stone;
+                }
+                break;
+            case "coal":
+                if (_coal >= 1)
+                {
+                    _coal--;
+                    coinBronze += costToSell_coal;
+                }
+                break;
+            case "copper":
+                if (_copper >= 1)
+                {
+                    _copper--;
+                    coinBronze += costToSell_copper;
+                }
+                break;
+            case "silver":
+                if (_silver >= 1)
+                {
+                    _silver--;
+                    coinBronze += costToSell_silver;
+                }
+                break;
+            case "gold":
+                if (_gold >= 1)
+                {
+                    _gold--;
+                    coinBronze += costToSell_gold;
+                }
+                break;
+            case "zinc":
+                if (_zinc >= 1)
+                {
+                    _zinc--;
+                    coinBronze += costToSell_zinc;
+                }
+                break;
+            default:
+                break;
         }
     }
-    public void SellMax_coal()
+    
+    //SELL ALL
+    public void SellResource(string resourceType)
     {
-        if (_coal > 0)
+        switch (resourceType)
         {
-            int total_coal = _coal;
-            _coal = 0;
-            coinBronze += total_coal * costToSell_coal;
+            case "stone":
+                if (_stone >= 0)
+                {
+                    int total_stone = _stone;
+                    _stone = 0;
+                    coinBronze += total_stone * costToSell_stone;
+                }
+                break;
+            case "coal":
+                if (_coal >= 0)
+                {
+                    int total_coal = _coal;
+                    _coal = 0;
+                    coinBronze += total_coal * costToSell_coal;
+                }
+                break;
+            case "copper":
+                if (_copper >= 0)
+                {
+                    int total_copper = _copper;
+                    _copper = 0;
+                    coinBronze += total_copper * costToSell_copper;
+                }
+                break;
+            case "silver":
+                if (_silver >= 0)
+                {
+                    int total_silver = _silver;
+                    _silver = 0;
+                    coinBronze += total_silver * costToSell_silver;
+                }
+                break;
+            case "gold":
+                if (_gold >= 0)
+                {
+                    int total_gold = _gold;
+                    _gold = 0;
+                    coinBronze += total_gold * costToSell_gold;
+                }
+                break;
+            case "zinc":
+                if (_zinc >= 0)
+                {
+                    int total_zinc = _zinc;
+                    _zinc = 0;
+                    coinBronze += total_zinc * costToSell_zinc;
+                }
+                break;
         }
     }
-    public void SellMax_copper()
-    {
-        if (_copper > 0)
-        {
-            int total_copper = _copper;
-            _copper = 0;
-            coinBronze += total_copper * costToSell_copper;
-        }
-    }
-    public void SellMax_silver()
-    {
-        if (_silver > 0)
-        {
-            int total_silver = _silver;
-            _silver = 0;
-            coinBronze += total_silver * costToSell_silver;
-        }
-    }
-    public void SellMax_gold()
-    {
-        if (_gold > 0)
-        {
-            int total_gold = _gold;
-            _gold = 0;
-            coinBronze += total_gold * costToSell_gold;
-        }
-    }
-    public void SellMax_zinc()
-    {
-        if (_zinc > 0)
-        {
-            int total_zinc = _zinc;
-            _zinc = 0;
-            coinBronze += total_zinc * costToSell_zinc;
-        }
-    }
-
-    //SAVE PROGRESS
-    void OnApplicationQuit()
-    {
-        PlayerPrefs.SetInt("coinBronze", coinBronze);
-        PlayerPrefs.SetInt("coinSilver", coinSilver);
-        PlayerPrefs.SetInt("coinGold", coinGold);
-        PlayerPrefs.SetInt("_stone", _stone);
-        PlayerPrefs.SetInt("_coal", _coal);
-        PlayerPrefs.SetInt("_copper", _copper);
-        PlayerPrefs.SetInt("_silver", _silver);
-        PlayerPrefs.SetInt("_gold", _gold);
-        PlayerPrefs.SetInt("_zinc", _zinc);
-        PlayerPrefs.SetInt("_clearCoal", _coalClear);
-        PlayerPrefs.SetInt("_copperClear", _copperClear);
-        PlayerPrefs.SetInt("_silverClear", _silverClear);
-        PlayerPrefs.SetInt("_goldClear", _goldClear);
-        PlayerPrefs.SetInt("_zincClear", _zincClear);
-        PlayerPrefs.SetInt("_obsidian", _obsidian);
-        PlayerPrefs.Save();
-}
 }
