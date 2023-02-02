@@ -63,7 +63,7 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         
 
         //LOAD PROGRESS
