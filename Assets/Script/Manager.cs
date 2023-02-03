@@ -45,18 +45,18 @@ public class Manager : MonoBehaviour
 
     //COST
     int costToBuy_stone = 50;
-    int costToBuyP_coal = 150;
-    int costToBuy_copper = 200;
-    int costToBuy_silver = 200;
-    int costToBuy_gold = 800;
-    int costToBuy_zinc = 100;
+    int costToBuyP_coal = 200;
+    int costToBuy_copper = 400;
+    int costToBuy_silver = 300;
+    int costToBuy_gold = 1400;
+    int costToBuy_zinc = 200;
 
 
     //SELL COST
     int costToSell_stone = 25;
-    int costToSell_coal = 75;
+    int costToSell_coal = 50;
     int costToSell_copper = 100;
-    int costToSell_silver = 100;
+    int costToSell_silver = 75;
     int costToSell_gold = 400;
     int costToSell_zinc = 50;
 
@@ -64,7 +64,7 @@ public class Manager : MonoBehaviour
     void Start()
     {
         //PlayerPrefs.DeleteAll();
-        
+
 
         //LOAD PROGRESS
         coinBronze = PlayerPrefs.GetInt("coinBronze", coinBronze);
@@ -169,6 +169,33 @@ public class Manager : MonoBehaviour
     displayText[i].text = FormatNumber(number);
         }
     }
+
+    public int GetResourceAmount(string resourceName)
+    {
+        switch (resourceName)
+        {
+            case "Coal":
+                return _coal;
+            case "CoalClear":
+                return _coalClear;
+            default:
+                return 0;
+        }
+    }
+    public void ModifyResourceAmount(string resourceName, int amount)
+    {
+        switch (resourceName)
+        {
+            case "Coal":
+                _coal += amount;
+                break;
+            case "CoalClear":
+                _coalClear += amount;
+                break;
+                // Add more cases for other resources
+        }
+    }
+
 
     public string FormatNumber(int number)
     {
