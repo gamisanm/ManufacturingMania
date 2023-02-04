@@ -45,11 +45,11 @@ public class Manager : MonoBehaviour
 
     //COST
     int costToBuy_stone = 50;
-    int costToBuyP_coal = 200;
-    int costToBuy_copper = 400;
-    int costToBuy_silver = 300;
-    int costToBuy_gold = 1400;
-    int costToBuy_zinc = 200;
+    int costToBuyP_coal = 400;
+    int costToBuy_copper = 800;
+    int costToBuy_silver = 600;
+    int costToBuy_gold = 2800;
+    int costToBuy_zinc = 400;
 
 
     //SELL COST
@@ -178,6 +178,22 @@ public class Manager : MonoBehaviour
                 return _coal;
             case "CoalClear":
                 return _coalClear;
+            case "Copper":
+                return _copper;
+            case "CopperClear":
+                return _copperClear;
+            case "Silver":
+                return _silver;
+            case "SilverClear":
+                return _silverClear;
+            case "Gold":
+                return _gold;
+            case "Goldclear":
+                return _goldClear;
+            case "Zinc":
+                return _zinc;
+            case "ZincClear":
+                return _zincClear;
             default:
                 return 0;
         }
@@ -192,7 +208,30 @@ public class Manager : MonoBehaviour
             case "CoalClear":
                 _coalClear += amount;
                 break;
-                // Add more cases for other resources
+            case "Copper":
+                _copper += amount;
+                break;
+            case "CopperClear":
+                _copperClear += amount;
+                break;
+            case "Silver":
+                _silver += amount;
+                break;
+            case "SilverClear":
+                _silverClear += amount;
+                break;
+            case "Gold":
+                _gold += amount;
+                break;
+            case "GoldClear":
+                _goldClear += amount;
+                break;
+            case "Zinc":
+                _zinc += amount;
+                break;
+            case "ZincClear":
+                _zincClear += amount;
+                break;
         }
     }
 
@@ -229,7 +268,7 @@ public class Manager : MonoBehaviour
                     _stoneText.text = "" + _stone;
                     _stone++;
                     CancelInvoke("Add_stone");
-                    InvokeRepeating("Add_stone", 2.0f, 2f);
+                    InvokeRepeating("Add_stone", 5.0f, 5.0f);
                 }
                 break;
             case "coal":
@@ -239,7 +278,7 @@ public class Manager : MonoBehaviour
                     _coalText.text = "" + _coal;
                     _coal++;
                     CancelInvoke("Add_coal");
-                    InvokeRepeating("Add_coal", 5.0f, 5.0f);
+                    InvokeRepeating("Add_coal", 10.0f, 10.0f);
                 }
                 break;
             case "copper":
@@ -249,7 +288,7 @@ public class Manager : MonoBehaviour
                     _copperText.text = "" + _copper;
                     _copper++;
                     CancelInvoke("Add_copper");
-                    InvokeRepeating("Add_copper", 7.0f, 7.0f);
+                    InvokeRepeating("Add_copper", 17.0f, 17.0f);
                 }
                 break;
             case "silver":
@@ -259,7 +298,7 @@ public class Manager : MonoBehaviour
                     _silverText.text = "" + _silver;
                     _silver++;
                     CancelInvoke("Add_silver");
-                    InvokeRepeating("Add_silver", 6.0f, 6.0f);
+                    InvokeRepeating("Add_silver", 12.0f, 12.0f);
                 }
                 break;
             case "gold":
@@ -269,7 +308,7 @@ public class Manager : MonoBehaviour
                     _goldText.text = "" + _gold;
                     _gold++;
                     CancelInvoke("Add_gold");
-                    InvokeRepeating("Add_gold", 20.0f, 20.0f);
+                    InvokeRepeating("Add_gold", 25.0f, 25.0f);
                 }
                 break;
             case "zinc":
@@ -279,7 +318,7 @@ public class Manager : MonoBehaviour
                     _zincText.text = "" + _zinc;
                     _zinc++;
                     CancelInvoke("Add_zinc");
-                    InvokeRepeating("Add_zinc", 9.0f, 9.0f);
+                    InvokeRepeating("Add_zinc", 14.0f, 14.0f);
                 }
                 break;
         }

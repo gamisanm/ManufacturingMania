@@ -14,99 +14,78 @@ public class ResourceData
 public class Processing : MonoBehaviour
 {
     public Manager manager;
-    public Button ovenButton;
+    public Button startButton;
     public Button stopButton;
     public Slider progressSlider;
-    private bool isProcessing;
-    private float processTime = 10f;
+    public bool isProcessing;
+    public float processTime = 20f;
+    public float elapsedTime = 0f;
 
     public List<ResourceData> resourcesToTakeAway;
     public List<ResourceData> resourcesToGive;
 
-    public void StartProcessing()
+    private void Start()
     {
-        if (!isProcessing)
-        {
-            bool canStart = true;
-            foreach (ResourceData resource in resourcesToTakeAway)
-            {
-                if (manager.GetResourceAmount(resource.resourceName) < resource.amount)
-                {
-                    canStart = false;
-                    break;
-                }
-            }
-
-            if (canStart)
-            {
-                isProcessing = true;
-                StartCoroutine(Process());
-            }
-        }
+        startButton.onClick.AddListener(StartProcessing);
+        stopButton.onClick.AddListener(StopProcessing);
+        gameObject.SetActive(true);
     }
 
     public void StopProcessing()
     {
-        isProcessing = false;
+        if (isProcessing)
+        {
+            CancelInvoke("UpdateProcessing");
+            elapsedTime = 0f;
+            isProcessing = false;
+        }
     }
 
-    IEnumerator Process()
+    public void StartProcessing()
     {
-        while (isProcessing)
+        if (!isProcessing && gameObject.activeSelf)
         {
-            bool canProcess = true;
-            foreach (ResourceData resource in resourcesToTakeAway)
+            isProcessing = true;
+            InvokeRepeating("UpdateProcessing", 0f, 0.1f);
+        }
+    }
+
+
+    private void UpdateProcessing()
+    {
+        if (!gameObject.activeSelf && isProcessing)
+        {
+            elapsedTime += 0.1f;
+            progressSlider.value = elapsedTime / processTime;
+
+            if (elapsedTime >= processTime)
             {
-                if (manager.GetResourceAmount(resource.resourceName) < resource.amount)
+                elapsedTime = 0f;
+                isProcessing = false;
+
+                bool canProcess = true;
+                foreach (ResourceData resource in resourcesToTakeAway)
                 {
-                    canProcess = false;
-                    break;
+                    if (manager.GetResourceAmount(resource.resourceName) < resource.amount)
+                    {
+                        canProcess = false;
+                        break;
+                    }
+                }
+
+                if (canProcess)
+                {
+                    foreach (ResourceData resource in resourcesToTakeAway)
+                    {
+                        manager.ModifyResourceAmount(resource.resourceName, -resource.amount);
+                    }
+
+                    foreach (ResourceData resource in resourcesToGive)
+                    {
+                        manager.ModifyResourceAmount(resource.resourceName, resource.amount);
+                    }
                 }
             }
-
-            if (!canProcess)
-            {
-                isProcessing = false;
-                break;
-            }
-
-            float elapsedTime = 0f;
-
-            // Take away resources before starting the process
-            TakeAwayResource();
-
-            while (elapsedTime < processTime && isProcessing)
-            {
-                progressSlider.value = elapsedTime / processTime;
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            if (isProcessing)
-            {
-                // Give resources after the process
-                GiveAnotherResource();
-            }
-        }
-
-        isProcessing = false;
-    }
-
-    private void TakeAwayResource()
-    {
-        // Code to take away resources
-        foreach (ResourceData resource in resourcesToTakeAway)
-        {
-            manager.ModifyResourceAmount(resource.resourceName, -resource.amount);
-        }
-    }
-
-    private void GiveAnotherResource()
-    {
-        // Code to give resources
-        foreach (ResourceData resource in resourcesToGive)
-        {
-            manager.ModifyResourceAmount(resource.resourceName, resource.amount);
         }
     }
 }
