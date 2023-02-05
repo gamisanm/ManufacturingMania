@@ -38,6 +38,14 @@ public class Manager : MonoBehaviour
     int costToBuy_yelloriumClear = 1900, costToBuy_cianyteClear = 1400, costToBuy_cryptonClear = 3600;
     int costToBuy_flintClear = 600, costToBuy_redstoneClear = 1000;
 
+    //ITEMS
+    public int _micro, _solarPanel1, _solarPanel2;
+
+    int costToBuy_micro = 4000, costToBuy_solarPanel1 = 8000, costToBuy_solarPanel2 = 10000;
+    int costToSell_micro = 2000, costToSell_solarPanel1 = 4000, costToSell_solarPanel2 = 5000;
+
+    public Text _microText, _solarPanel1Text, _solarPanel2Text;
+
 
     //SELL COST
     int costToSell_stone = 25, costToSell_coal = 50, costToSell_copper = 100;
@@ -50,64 +58,6 @@ public class Manager : MonoBehaviour
     int costToSell_zincClear = 100, costToSell_yelloriumClear = 400, costToSell_cianyteClear = 350;
     int costToSell_cryptonClear = 900, costToSell_flintClear = 150, costToSell_redstoneClear = 250;
 
-
-    void Start()
-    {
-        //LOAD PROGRESS
-        coinBronze = PlayerPrefs.GetInt("coinBronze", coinBronze);
-        coinSilver = PlayerPrefs.GetInt("coinSilver", coinSilver);
-        coinGold = PlayerPrefs.GetInt("coinGold", coinGold);
-        _stone = PlayerPrefs.GetInt("_stone", _stone);
-        _coal = PlayerPrefs.GetInt("_coal", _coal);
-        _copper = PlayerPrefs.GetInt("_copper", _copper);
-        _silver = PlayerPrefs.GetInt("_silver", _silver);
-        _gold = PlayerPrefs.GetInt("_gold", _gold);
-        _zinc = PlayerPrefs.GetInt("_zinc", _zinc);
-        _coalClear = PlayerPrefs.GetInt("_coalClear", _coalClear);
-        _copperClear = PlayerPrefs.GetInt("_coalClear", _copperClear);
-        _silverClear = PlayerPrefs.GetInt("_silverClear", _silverClear);
-        _goldClear = PlayerPrefs.GetInt("_goldClear", _goldClear);
-        _zincClear = PlayerPrefs.GetInt("_zincClear", _zincClear);
-        _yellorium = PlayerPrefs.GetInt("_yelloorium", _yellorium);
-        _cianyte = PlayerPrefs.GetInt("_cianyte", _cianyte);
-        _crypton = PlayerPrefs.GetInt("_crypton", _crypton);
-        _flint = PlayerPrefs.GetInt("_flint", _flint);
-        _redstone = PlayerPrefs.GetInt("_redstone", _redstone);
-        _yelloriumClear = PlayerPrefs.GetInt("_yelloriumClear", _yelloriumClear);
-        _cianyteClear = PlayerPrefs.GetInt("_cianyteClear", _cianyteClear);
-        _cryptonClear = PlayerPrefs.GetInt("_cryptonClear", _cryptonClear);
-        _flintClear = PlayerPrefs.GetInt("_flintClear", _flintClear);
-        _redstoneClear = PlayerPrefs.GetInt("_redstoneClear", _redstoneClear);
-    }
-    //SAVE PROGRESS
-    void OnApplicationQuit()
-    {
-        PlayerPrefs.SetInt("coinBronze", coinBronze);
-        PlayerPrefs.SetInt("coinSilver", coinSilver);
-        PlayerPrefs.SetInt("coinGold", coinGold);
-        PlayerPrefs.SetInt("_stone", _stone);
-        PlayerPrefs.SetInt("_coal", _coal);
-        PlayerPrefs.SetInt("_copper", _copper);
-        PlayerPrefs.SetInt("_silver", _silver);
-        PlayerPrefs.SetInt("_gold", _gold);
-        PlayerPrefs.SetInt("_zinc", _zinc);
-        PlayerPrefs.SetInt("_yellorium", _yellorium);
-        PlayerPrefs.SetInt("_cianyte", _cianyte);
-        PlayerPrefs.SetInt("_crypton", _crypton);
-        PlayerPrefs.SetInt("_flint", _flint);
-        PlayerPrefs.SetInt("_redstone", _redstone);
-        PlayerPrefs.SetInt("_clearCoal", _coalClear);
-        PlayerPrefs.SetInt("_copperClear", _copperClear);
-        PlayerPrefs.SetInt("_silverClear", _silverClear);
-        PlayerPrefs.SetInt("_goldClear", _goldClear);
-        PlayerPrefs.SetInt("_zincClear", _zincClear);
-        PlayerPrefs.SetInt("_yelloriumClear", _yelloriumClear);
-        PlayerPrefs.SetInt("_cianyteClear", _cianyteClear);
-        PlayerPrefs.SetInt("_cryptonClear", _cryptonClear);
-        PlayerPrefs.SetInt("_flintClear", _flintClear);
-        PlayerPrefs.SetInt("_redstoneClear", _redstoneClear);
-        PlayerPrefs.Save();
-    }
 
     void Update()
     {
@@ -139,6 +89,10 @@ public class Manager : MonoBehaviour
         _cryptonClearText.text = "" + _cryptonClearText;
         _flintClearText.text = "" + _flintClearText;
         _redstoneClearText.text = "" + _redstoneClearText;
+
+        _microText.text = "" + _microText;
+        _solarPanel1Text.text = "" + _solarPanel1;
+        _solarPanel2Text.text = "" + _solarPanel2;
 
 
         for (int i = 0; i < displayText.Length; i++)
@@ -218,6 +172,15 @@ public class Manager : MonoBehaviour
                 case 23:
                     number = _redstoneClear;
                     break;
+                case 24:
+                    number = _micro;
+                    break;
+                case 25:
+                    number = _solarPanel1;
+                    break;
+                case 26:
+                    number = _solarPanel2;
+                    break;
             }
 
     displayText[i].text = FormatNumber(number);
@@ -268,6 +231,12 @@ public class Manager : MonoBehaviour
                 return _flintClear;
             case "RedstoneClear":
                 return _redstoneClear;
+            case "Micro":
+                return _micro;
+            case "SolarPanel1":
+                return _solarPanel1;
+            case "SolarPanel2":
+                return _solarPanel2;
             default:
                 return 0;
         }
@@ -335,6 +304,15 @@ public class Manager : MonoBehaviour
                 break;
             case "RedstoneClear":
                 _redstoneClear += amount;
+                break;
+            case "Micro":
+                _micro += amount;
+                break;
+            case "SolarPanel1":
+                _solarPanel1 += amount;
+                break;
+            case "SolarPanel2":
+                _solarPanel2 += amount;
                 break;
         }
     }
