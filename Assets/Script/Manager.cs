@@ -6,6 +6,9 @@ public class Manager : MonoBehaviour
     //abbreviations
     public Text[] displayText;
 
+    //ads
+    public static Manager S;
+    [SerializeField] private float _persentShowAds;
     //MONEY
     public int coinBronze;
     public int coinSilver;
@@ -338,6 +341,15 @@ public class Manager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        InterstitialAd.S.LoadAd();
+    }
+    private void Awake()
+    {
+        S = this;
+    }
+
     //BUY
     public void BuyResource(string resourceType)
     {
@@ -351,6 +363,10 @@ public class Manager : MonoBehaviour
                     _stone++;
                     CancelInvoke("Add_stone");
                     InvokeRepeating("Add_stone", 5.0f, 5.0f);
+
+                    float tempPersent = Random.Range(0f, 1f);
+                    if (tempPersent < _persentShowAds)
+                        InterstitialAd.S.ShowAd();
                 }
                 break;
             case "coal":
