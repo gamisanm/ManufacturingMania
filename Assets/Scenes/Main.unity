@@ -2647,9 +2647,6 @@ MonoBehaviour:
   startButton: {fileID: 39153935}
   stopButton: {fileID: 761320895}
   progressSlider: {fileID: 1701784148}
-  isProcessing: 0
-  processTime: 20
-  elapsedTime: 0
   resourcesToTakeAway:
   - resourceName: Copper
     amount: 8
@@ -4430,9 +4427,6 @@ MonoBehaviour:
   startButton: {fileID: 2020728997}
   stopButton: {fileID: 1425343866}
   progressSlider: {fileID: 25487799}
-  isProcessing: 0
-  processTime: 20
-  elapsedTime: 0
   resourcesToTakeAway:
   - resourceName: Silver
     amount: 5
@@ -5088,14 +5082,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.37497967, g: 0.25342646, b: 0.6320754, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a093780a76b8e8c4c8b121e123d21a82, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7154,9 +7148,6 @@ MonoBehaviour:
   startButton: {fileID: 268002742}
   stopButton: {fileID: 1070221215}
   progressSlider: {fileID: 1139725656}
-  isProcessing: 0
-  processTime: 20
-  elapsedTime: 0
   resourcesToTakeAway:
   - resourceName: Zinc
     amount: 5
@@ -9149,9 +9140,6 @@ MonoBehaviour:
   startButton: {fileID: 1000000440}
   stopButton: {fileID: 666539569}
   progressSlider: {fileID: 987782207}
-  isProcessing: 0
-  processTime: 20
-  elapsedTime: 0
   resourcesToTakeAway:
   - resourceName: Coal
     amount: 5
@@ -13290,7 +13278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6348566443e2e465893b4204b77239ed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14034,9 +14022,6 @@ MonoBehaviour:
   startButton: {fileID: 1153475746}
   stopButton: {fileID: 1429630024}
   progressSlider: {fileID: 794192814}
-  isProcessing: 0
-  processTime: 20
-  elapsedTime: 0
   resourcesToTakeAway:
   - resourceName: Gold
     amount: 15
