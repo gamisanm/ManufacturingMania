@@ -1,3 +1,4 @@
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,8 @@ public class Manager : MonoBehaviour
 {
     //abbreviations
     public Text[] displayText;
+
+    public MoveSprite ms;
 
     //ads
     public static Manager S;
@@ -341,14 +344,15 @@ public class Manager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        InterstitialAd.S.LoadAd();
-    }
-    private void Awake()
-    {
-        S = this;
-    }
+    //private void Start()
+    //{
+    //    InterstitialAd.S.LoadAd();
+    //}
+    //private void Awake()
+    //{
+    //    S = this;
+    //}
+
 
     //BUY
     public void BuyResource(string resourceType)
@@ -363,10 +367,12 @@ public class Manager : MonoBehaviour
                     _stone++;
                     CancelInvoke("Add_stone");
                     InvokeRepeating("Add_stone", 5.0f, 5.0f);
+                    InvokeRepeating("Add_stoneMove", 0.01f, 0.01f);
 
-                    float tempPersent = Random.Range(0f, 1f);
-                    if (tempPersent < _persentShowAds)
-                        InterstitialAd.S.ShowAd();
+                    //float tempPersent = Random.Range(0f, 1f);
+                    //if (tempPersent < _persentShowAds)
+                    //    InterstitialAd.S.ShowAd();
+
                 }
                 break;
             case "coal":
@@ -556,6 +562,10 @@ public class Manager : MonoBehaviour
     private void Add_stone()
     {
         _stone++;
+    }
+    private void Add_stoneMove()
+    {
+        ms.StartMove();
     }
     private void Add_coal()
     {
