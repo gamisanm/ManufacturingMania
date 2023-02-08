@@ -18,13 +18,13 @@ public class MoveSprite : MonoBehaviour
             if (currentTarget == endPoint.position)
             {
                 textToDisplay.text = "-1";
-                Invoke("ResetText", 0.5f);
+                Invoke("ResetText", 0.3f);
                 currentTarget = startPoint.position;
             }
             else
             {
                 textToDisplay.text = "+1";
-                Invoke("ResetText", 0.5f);
+                Invoke("ResetText", 0.3f);
                 currentTarget = endPoint.position;
             }
         }

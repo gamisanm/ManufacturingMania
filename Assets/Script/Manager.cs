@@ -1,4 +1,4 @@
-using System.Net;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +12,7 @@ public class Manager : MonoBehaviour
     //ads
     public static Manager S;
     [SerializeField] private float _persentShowAds;
+
     //MONEY
     public int coinBronze;
     public int coinSilver;
@@ -31,39 +32,68 @@ public class Manager : MonoBehaviour
     public Text _stoneText, _coalText, _copperText, _silverText, _goldText, _zincText, _yelloriumText, _cianyteText, _cryptonText, _flintText, _redstoneText;
     public Text _coalClearText, _copperClearText, _silverClearText, _goldClearText, _zincClearText, _yelloriumClearText, _cianyteClearText, _cryptonClearText, _flintClearText, _redstoneClearText;
 
-    //COST
-    int costToBuy_stone = 50, costToBuyP_coal = 400, costToBuy_copper = 800;
-    int costToBuy_silver = 600, costToBuy_gold = 2800, costToBuy_zinc = 400;
-
-    int costToBuy_coalClear = 800, costToBuy_copperClear = 1600;
-    int costToBuy_silverClear = 1200, costToBuy_goldClear = 5600, costToBuy_zincClear = 800;
-
-    int costToBuy_yellorium = 800, costToBuy_cianyte = 700, costToBuy_crypton = 1800;
-    int costToBuy_flint = 300, costToBuy_redstone = 500;
-
-    int costToBuy_yelloriumClear = 1900, costToBuy_cianyteClear = 1400, costToBuy_cryptonClear = 3600;
-    int costToBuy_flintClear = 600, costToBuy_redstoneClear = 1000;
 
     //ITEMS
     public int _micro, _solarPanel1, _solarPanel2;
 
-    int costToBuy_micro = 4000, costToBuy_solarPanel1 = 8000, costToBuy_solarPanel2 = 10000;
-    int costToSell_micro = 2000, costToSell_solarPanel1 = 4000, costToSell_solarPanel2 = 5000;
-
     public Text _microText, _solarPanel1Text, _solarPanel2Text;
 
 
-    //SELL COST
-    int costToSell_stone = 25, costToSell_coal = 50, costToSell_copper = 100;
-    int costToSell_silver = 75, costToSell_gold = 400, costToSell_zinc = 50;
+    public Dictionary<string, int> costToBuy = new Dictionary<string, int>()
+    {
+        {"stone", 50},
+        {"coal", 400},
+        {"copper", 800},
+        {"silver", 600},
+        {"gold", 2800},
+        {"zinc", 400},
+        {"coalClear", 800},
+        {"copperClear", 1600},
+        {"silverClear", 1200},
+        {"goldClear", 5600},
+        {"zincClear", 800},
+        {"yellorium", 800},
+        {"cianyte", 700},
+        {"crypton", 1800},
+        {"flint", 300},
+        {"redstone", 500},
+        {"yelloriumClear", 1900},
+        {"cianyteClear", 1400},
+        {"cryptonClear", 3600},
+        {"flintClear", 600},
+        {"redstoneClear", 1000},
+        {"micro", 4000 },
+        {"solarPanel1", 8000},
+        {"solarPanel2", 10000}
+    };
 
-    int costToSell_yellorium = 200, costToSell_cianyte = 175, costToSell_crypton = 450;
-    int costToSell_flint = 75, costToSell_redstone = 125, costToSell_coalClear = 100;
-    int costToSell_copperClear = 200, costToSell_silverClear = 150, costToSell_goldClear = 800;
-
-    int costToSell_zincClear = 100, costToSell_yelloriumClear = 400, costToSell_cianyteClear = 350;
-    int costToSell_cryptonClear = 900, costToSell_flintClear = 150, costToSell_redstoneClear = 250;
-
+    public Dictionary<string, int> costToSell = new Dictionary<string, int>()
+    {
+        {"stone", 25},
+        {"coal", 50},
+        {"copper", 100},
+        {"silver", 75},
+        {"gold", 400},
+        {"zinc", 50},
+        {"yellorium", 200},
+        {"cianyte", 175},
+        {"crypton", 450},
+        {"flint", 75},
+        {"redstone", 125},
+        {"coalClear", 100},
+        {"copperClear", 200},
+        {"silverClear", 150},
+        {"goldClear", 800},
+        {"zincClear", 100},
+        {"yelloriumClear", 400},
+        {"cianyteClear", 350},
+        {"cryptonClear", 900},
+        {"flintClear", 150},
+        {"redstoneClear", 250},
+        {"micro", 2000},
+        {"solarPanel1", 4000},
+        {"solarPanel2", 5000},
+    };
 
     void Update()
     {
@@ -343,6 +373,7 @@ public class Manager : MonoBehaviour
             return number.ToString();
         }
     }
+    //ADDS
 
     //private void Start()
     //{
@@ -353,6 +384,9 @@ public class Manager : MonoBehaviour
     //    S = this;
     //}
 
+    //float tempPersent = Random.Range(0f, 1f);
+    //if (tempPersent < _persentShowAds)
+    //    InterstitialAd.S.ShowAd();
 
     //BUY
     public void BuyResource(string resourceType)
@@ -360,25 +394,20 @@ public class Manager : MonoBehaviour
         switch (resourceType)
         {
             case "stone":
-                if (coinBronze >= costToBuy_stone)
+                if (coinBronze >= costToBuy["stone"])
                 {
-                    coinBronze -= costToBuy_stone;
+                    coinBronze -= costToBuy["stone"];
                     _stoneText.text = "" + _stone;
                     _stone++;
                     CancelInvoke("Add_stone");
                     InvokeRepeating("Add_stone", 5.0f, 5.0f);
                     InvokeRepeating("Add_stoneMove", 0.01f, 0.01f);
-
-                    //float tempPersent = Random.Range(0f, 1f);
-                    //if (tempPersent < _persentShowAds)
-                    //    InterstitialAd.S.ShowAd();
-
                 }
                 break;
             case "coal":
-                if (coinBronze > costToBuyP_coal)
+                if (coinBronze > costToBuy["coal"])
                 {
-                    coinBronze -= costToBuyP_coal;
+                    coinBronze -= costToBuy["coal"];
                     _coalText.text = "" + _coal;
                     _coal++;
                     CancelInvoke("Add_coal");
@@ -386,9 +415,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "copper":
-                if (coinBronze > costToBuy_copper)
+                if (coinBronze > costToBuy["copper"])
                 {
-                    coinBronze -= costToBuy_copper;
+                    coinBronze -= costToBuy["copper"];
                     _copperText.text = "" + _copper;
                     _copper++;
                     CancelInvoke("Add_copper");
@@ -396,9 +425,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "silver":
-                if (coinBronze > costToBuy_silver)
+                if (coinBronze > costToBuy["silver"])
                 {
-                    coinBronze -= costToBuy_silver;
+                    coinBronze -= costToBuy["silver"];
                     _silverText.text = "" + _silver;
                     _silver++;
                     CancelInvoke("Add_silver");
@@ -406,9 +435,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "gold":
-                if (coinBronze > costToBuy_gold)
+                if (coinBronze > costToBuy["gold"])
                 {
-                    coinBronze -= costToBuy_gold;
+                    coinBronze -= costToBuy["gold"];
                     _goldText.text = "" + _gold;
                     _gold++;
                     CancelInvoke("Add_gold");
@@ -416,9 +445,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "zinc":
-                if (coinBronze > costToBuy_zinc)
+                if (coinBronze > costToBuy["zinc"])
                 {
-                    coinBronze -= costToBuy_zinc;
+                    coinBronze -= costToBuy["zinc"];
                     _zincText.text = "" + _zinc;
                     _zinc++;
                     CancelInvoke("Add_zinc");
@@ -426,9 +455,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "yellorium":
-                if (coinBronze > costToBuy_yellorium)
+                if (coinBronze > costToBuy["yellorium"])
                 {
-                    coinBronze -= costToBuy_yellorium;
+                    coinBronze -= costToBuy["yellorium"];
                     _yelloriumText.text = "" + _yellorium;
                     _yellorium++;
                     CancelInvoke("Add_yellorium");
@@ -436,9 +465,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "cianyte":
-                if (coinBronze > costToBuy_cianyte)
+                if (coinBronze > costToBuy["cianyte"])
                 {
-                    coinBronze -= costToBuy_cianyte;
+                    coinBronze -= costToBuy["cianyte"];
                     _cianyteText.text = "" + _cianyte;
                     _cianyte++;
                     CancelInvoke("Add_cianyte");
@@ -446,9 +475,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "crypton":
-                if (coinBronze > costToBuy_crypton)
+                if (coinBronze > costToBuy["crypton"])
                 {
-                    coinBronze -= costToBuy_crypton;
+                    coinBronze -= costToBuy["crypton"];
                     _cryptonText.text = "" + _crypton;
                     _crypton++;
                     CancelInvoke("Add_crypton");
@@ -456,9 +485,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "flint":
-                if (coinBronze > costToBuy_flint)
+                if (coinBronze > costToBuy["flint"])
                 {
-                    coinBronze -= costToBuy_flint;
+                    coinBronze -= costToBuy["flint"];
                     _flintText.text = "" + _flint;
                     _flint++;
                     CancelInvoke("Add_flint");
@@ -466,9 +495,9 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "redstone":
-                if (coinBronze > costToBuy_redstone)
+                if (coinBronze > costToBuy["redstone"])
                 {
-                    coinBronze -= costToBuy_redstone;
+                    coinBronze -= costToBuy["redstone"];
                     _redstoneText.text = "" + _redstone;
                     _redstone++;
                     CancelInvoke("Add_redstone");
@@ -476,81 +505,81 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case "yelloriumClear":
-                if (coinBronze > costToBuy_yelloriumClear)
+                if (coinBronze > costToBuy["yelloriumClear"])
                 {
-                    coinBronze -= costToBuy_yelloriumClear;
+                    coinBronze -= costToBuy["yelloriumClear"];
                     _yelloriumClearText.text = "" + _yelloriumClear;
                     _yelloriumClear++;
                 }
                 break;
             case "cianyteClear":
-                if (coinBronze > costToBuy_cianyteClear)
+                if (coinBronze > costToBuy["cianyteClear"])
                 {
-                    coinBronze -= costToBuy_cianyteClear;
+                    coinBronze -= costToBuy["cianyteClear"];
                     _cianyteClearText.text = "" + _cianyteClear;
                     _cianyteClear++;
                 }
                 break;
             case "cryptonClear":
-                if (coinBronze > costToBuy_cryptonClear)
+                if (coinBronze > costToBuy["cryptonClear"])
                 {
-                    coinBronze -= costToBuy_cryptonClear;
+                    coinBronze -= costToBuy["cryptonClear"];
                     _cryptonClearText.text = "" + _cryptonClear;
                     _cryptonClear++;
                 }
                 break;
             case "flintClear":
-                if (coinBronze > costToBuy_flintClear)
+                if (coinBronze > costToBuy["flintClear"])
                 {
-                    coinBronze -= costToBuy_flintClear;
+                    coinBronze -= costToBuy["flintClear"];
                     _flintClearText.text = "" + _flintClear;
                     _flintClear++;
                 }
                 break;
             case "redstoneClear":
-                if (coinBronze > costToBuy_redstoneClear)
+                if (coinBronze > costToBuy["redstoneClear"])
                 {
-                    coinBronze -= costToBuy_redstoneClear;
+                    coinBronze -= costToBuy["redstoneClear"];
                     _redstoneClearText.text = "" + _redstoneClear;
                     _redstoneClear++;
                 }
                 break;
             case "coalClear":
-                if (coinBronze > costToBuy_coalClear)
+                if (coinBronze > costToBuy["coalClear"])
                 {
-                    coinBronze -= costToBuy_coalClear;
+                    coinBronze -= costToBuy["coalClear"];
                     _coalClearText.text = "" + _coalClear;
                     _coalClear++;
                 }
                 break;
             case "copperClear":
-                if (coinBronze > costToBuy_copperClear)
+                if (coinBronze > costToBuy["copperClear"])
                 {
-                    coinBronze -= costToBuy_copperClear;
+                    coinBronze -= costToBuy["copperClear"];
                     _copperClearText.text = "" + _copperClear;
                     _copperClear++;
                 }
                 break;
             case "silverClear":
-                if (coinBronze > costToBuy_silverClear)
+                if (coinBronze > costToBuy["silverClear"])
                 {
-                    coinBronze -= costToBuy_silverClear;
+                    coinBronze -= costToBuy["silverClear"];
                     _silverClearText.text = "" + _silverClear;
                     _silverClear++;
                 }
                 break;
             case "goldClear":
-                if (coinBronze > costToBuy_goldClear)
+                if (coinBronze > costToBuy["goldClear"])
                 {
-                    coinBronze -= costToBuy_goldClear;
+                    coinBronze -= costToBuy["goldClear"];
                     _goldClearText.text = "" + _goldClear;
                     _goldClear++;
                 }
                 break;
             case "zincClear":
-                if (coinBronze > costToBuy_zincClear)
+                if (coinBronze > costToBuy["zincClear"])
                 {
-                    coinBronze -= costToBuy_zincClear;
+                    coinBronze -= costToBuy["zincClear"];
                     _zincClearText.text = "" + _zincClear;
                     _zincClear++;
                 }
@@ -618,147 +647,168 @@ public class Manager : MonoBehaviour
                 if (_stone >= 1)
                 {
                     _stone--;
-                    coinBronze += costToSell_stone;
+                    coinBronze += costToBuy["stone"];
                 }
                 break;
             case "coal":
                 if (_coal >= 1)
                 {
                     _coal--;
-                    coinBronze += costToSell_coal;
+                    coinBronze += costToBuy["coal"];
                 }
                 break;
             case "copper":
                 if (_copper >= 1)
                 {
                     _copper--;
-                    coinBronze += costToSell_copper;
+                    coinBronze += costToBuy["copper"];
                 }
                 break;
             case "silver":
                 if (_silver >= 1)
                 {
                     _silver--;
-                    coinBronze += costToSell_silver;
+                    coinBronze += costToBuy["silver"];
                 }
                 break;
             case "gold":
                 if (_gold >= 1)
                 {
                     _gold--;
-                    coinBronze += costToSell_gold;
+                    coinBronze += costToBuy["gold"];
                 }
                 break;
             case "zinc":
                 if (_zinc >= 1)
                 {
                     _zinc--;
-                    coinBronze += costToSell_zinc;
+                    coinBronze += costToBuy["zinc"];
                 }
                 break;
             case "yellorium":
                 if (_yellorium >= 1)
                 {
                     _yellorium--;
-                    coinBronze += costToSell_yellorium;
+                    coinBronze += costToBuy["yellorium"];
                 }
                 break;
             case "cianyte":
                 if (_cianyte >= 1)
                 {
                     _cianyte--;
-                    coinBronze += costToSell_cianyte;
+                    coinBronze += costToBuy["cianyte"];
                 }
                 break;
             case "crypton":
                 if (_crypton >= 1)
                 {
                     _crypton--;
-                    coinBronze += costToSell_crypton;
+                    coinBronze += costToBuy["crypton"];
                 }
                 break;
             case "flint":
                 if (_flint >= 1)
                 {
                     _flint--;
-                    coinBronze += costToSell_flint;
+                    coinBronze += costToBuy["flint"];
                 }
                 break;
             case "redstone":
                 if (_redstone >= 1)
                 {
                     _redstone--;
-                    coinBronze += costToSell_redstone;
+                    coinBronze += costToBuy["redstone"];
                 }
                 break;
             case "coalClear":
                 if (_coalClear >= 1)
                 {
                     _coalClear--;
-                    coinBronze += costToSell_coalClear;
+                    coinBronze += costToBuy["coalClear"];
                 }
                 break;
             case "copperClear":
                 if (_copperClear >= 1)
                 {
                     _copperClear--;
-                    coinBronze += costToSell_copperClear;
+                    coinBronze += costToBuy["copperClear"];
                 }
                 break;
             case "silverClear":
                 if (_silverClear >= 1)
                 {
                     _silverClear--;
-                    coinBronze += costToSell_silverClear;
+                    coinBronze += costToBuy["silverClear"];
                 }
                 break;
             case "goldClear":
                 if (_goldClear >= 1)
                 {
                     _goldClear--;
-                    coinBronze += costToSell_goldClear;
+                    coinBronze += costToBuy["goldClear"];
                 }
                 break;
             case "zincClear":
                 if (_zincClear >= 1)
                 {
                     _zincClear--;
-                    coinBronze += costToSell_zincClear;
+                    coinBronze += costToBuy["zincClear"];
                 }
                 break;
             case "yelloriumClear":
                 if (_yelloriumClear >= 1)
                 {
                     _yelloriumClear--;
-                    coinBronze += costToSell_yelloriumClear;
+                    coinBronze += costToBuy["yelloriumClear"];
                 }
                 break;
             case "cianyteClear":
                 if (_cianyteClear >= 1)
                 {
                     _cianyteClear--;
-                    coinBronze += costToSell_cianyteClear;
+                    coinBronze += costToBuy["cianyteClear"];
                 }
                 break;
             case "cryptonClear":
                 if (_cryptonClear >= 1)
                 {
                     _cryptonClear--;
-                    coinBronze += costToSell_cryptonClear;
+                    coinBronze += costToBuy["cryptonClear"];
                 }
                 break;
             case "flintClear":
                 if (_flintClear >= 1)
                 {
                     _flintClear--;
-                    coinBronze += costToSell_flintClear;
+                    coinBronze += costToBuy["flintClear"];
                 }
                 break;
             case "redstoneClear":
                 if (_redstoneClear >= 1)
                 {
                     _redstoneClear--;
-                    coinBronze += costToSell_redstoneClear;
+                    coinBronze += costToBuy["redstoneClear"];
+                }
+                break;
+            case "micro":
+                if (_micro >= 1)
+                {
+                    _micro--;
+                    coinBronze += costToBuy["micro"];
+                }
+                break;
+            case "solarPanel1":
+                if (_solarPanel1 >= 1)
+                {
+                    _solarPanel1--;
+                    coinBronze += costToBuy["solarPanel1"];
+                }
+                break;
+            case "solarPanel2":
+                if (_solarPanel2 >= 1)
+                {
+                    _solarPanel2--;
+                    coinBronze += costToBuy["solarPanel2"];
                 }
                 break;
             default:
@@ -776,7 +826,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_stone = _stone;
                     _stone = 0;
-                    coinBronze += total_stone * costToSell_stone;
+                    coinBronze += total_stone * costToBuy["stone"];
                 }
                 break;
             case "coal":
@@ -784,7 +834,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_coal = _coal;
                     _coal = 0;
-                    coinBronze += total_coal * costToSell_coal;
+                    coinBronze += total_coal * costToBuy["coal"];
                 }
                 break;
             case "copper":
@@ -792,7 +842,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_copper = _copper;
                     _copper = 0;
-                    coinBronze += total_copper * costToSell_copper;
+                    coinBronze += total_copper * costToBuy["copper"];
                 }
                 break;
             case "silver":
@@ -800,7 +850,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_silver = _silver;
                     _silver = 0;
-                    coinBronze += total_silver * costToSell_silver;
+                    coinBronze += total_silver * costToBuy["silver"];
                 }
                 break;
             case "gold":
@@ -808,7 +858,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_gold = _gold;
                     _gold = 0;
-                    coinBronze += total_gold * costToSell_gold;
+                    coinBronze += total_gold * costToBuy["gold"];
                 }
                 break;
             case "zinc":
@@ -816,7 +866,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_zinc = _zinc;
                     _zinc = 0;
-                    coinBronze += total_zinc * costToSell_zinc;
+                    coinBronze += total_zinc * costToBuy["zinc"];
                 }
                 break;
             case "yellorium":
@@ -824,7 +874,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_yellorium = _yellorium;
                     _yellorium = 0;
-                    coinBronze += total_yellorium * costToSell_yellorium;
+                    coinBronze += total_yellorium * costToBuy["yellorium"];
                 }
                 break;
             case "cianyte":
@@ -832,7 +882,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_cianyte = _cianyte;
                     _cianyte = 0;
-                    coinBronze += total_cianyte * costToSell_cianyte;
+                    coinBronze += total_cianyte * costToBuy["cianyte"];
                 }
                 break;
             case "crypton":
@@ -840,7 +890,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_crypton = _crypton;
                     _crypton = 0;
-                    coinBronze += total_crypton * costToSell_crypton;
+                    coinBronze += total_crypton * costToBuy["crypton"];
                 }
                 break;
             case "flint":
@@ -848,7 +898,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_flint = _flint;
                     _flint = 0;
-                    coinBronze += total_flint * costToSell_flint;
+                    coinBronze += total_flint * costToBuy["flint"];
                 }
                 break;
             case "redstone":
@@ -856,7 +906,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_redstone = _redstone;
                     _redstone = 0;
-                    coinBronze += total_redstone * costToSell_redstone;
+                    coinBronze += total_redstone * costToBuy["redstone"];
                 }
                 break;
             case "coalClear":
@@ -864,7 +914,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_coalClear = _coalClear;
                     _coalClear = 0;
-                    coinBronze += total_coalClear * costToSell_coalClear;
+                    coinBronze += total_coalClear * costToBuy["coalClear"];
                 }
                 break;
             case "copperClear":
@@ -872,7 +922,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_copperClear = _copperClear;
                     _copperClear = 0;
-                    coinBronze += total_copperClear * costToSell_copperClear;
+                    coinBronze += total_copperClear * costToBuy["copperClear"];
                 }
                 break;
             case "silverClear":
@@ -880,7 +930,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_silverClear = _silverClear;
                     _silverClear = 0;
-                    coinBronze += total_silverClear * costToSell_silverClear;
+                    coinBronze += total_silverClear * costToBuy["silverClear"];
                 }
                 break;
             case "goldClear":
@@ -888,7 +938,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_goldClear = _goldClear;
                     _goldClear = 0;
-                    coinBronze += total_goldClear * costToSell_goldClear;
+                    coinBronze += total_goldClear * costToBuy["goldClear"];
                 }
                 break;
             case "zincClear":
@@ -896,7 +946,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_zincClear = _zincClear;
                     _zincClear = 0;
-                    coinBronze += total_zincClear * costToSell_zincClear;
+                    coinBronze += total_zincClear * costToBuy["zincClear"];
                 }
                 break;
             case "yelloriumClear":
@@ -904,7 +954,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_yelloriumClear = _yelloriumClear;
                     _yelloriumClear = 0;
-                    coinBronze += total_yelloriumClear * costToSell_yelloriumClear;
+                    coinBronze += total_yelloriumClear * costToBuy["yelloriumClear"];
                 }
                 break;
             case "cianyteClear":
@@ -912,7 +962,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_cianyteClear = _cianyteClear;
                     _cianyteClear = 0;
-                    coinBronze += total_cianyteClear * costToSell_cianyteClear;
+                    coinBronze += total_cianyteClear * costToBuy["cianyteClear"];
                 }
                 break;
             case "cryptonClear":
@@ -920,7 +970,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_cryptonClear = _cryptonClear;
                     _cryptonClear = 0;
-                    coinBronze += total_cryptonClear * costToSell_cryptonClear;
+                    coinBronze += total_cryptonClear * costToBuy["cryptonClear"];
                 }
                 break;
             case "flintClear":
@@ -928,7 +978,7 @@ public class Manager : MonoBehaviour
                 {
                     int total_flintClear = _flintClear;
                     _flintClear = 0;
-                    coinBronze += total_flintClear * costToSell_flintClear;
+                    coinBronze += total_flintClear * costToBuy["flintClear"];
                 }
                 break;
             case "redstoneClear":
@@ -936,7 +986,31 @@ public class Manager : MonoBehaviour
                 {
                     int total_redstoneClear = _redstoneClear;
                     _redstoneClear = 0;
-                    coinBronze += total_redstoneClear * costToSell_redstoneClear;
+                    coinBronze += total_redstoneClear * costToBuy["redstoneClear"];
+                }
+                break;
+            case "micro":
+                if (_micro >= 0)
+                {
+                    int total_micro = _micro;
+                    _micro = 0;
+                    coinBronze += total_micro * costToBuy["micro"];
+                }
+                break;
+            case "solarPanel1":
+                if (_solarPanel1 >= 0)
+                {
+                    int total_solarPanel1 = _solarPanel1;
+                    _solarPanel1 = 0;
+                    coinBronze += total_solarPanel1 * costToBuy["solarPanel1"];
+                }
+                break;
+            case "solarPanel2":
+                if (_solarPanel2 >= 0)
+                {
+                    int total_solarPanel2 = _solarPanel2;
+                    _solarPanel2 = 0;
+                    coinBronze += total_solarPanel2 * costToBuy["solarPanel2"];
                 }
                 break;
         }

@@ -38,6 +38,8 @@ public class SaveLoadProgress : MonoBehaviour
         manager._micro = PlayerPrefs.GetInt("_micro", manager._micro);
         manager._solarPanel1 = PlayerPrefs.GetInt("_solarPanel1", manager._solarPanel1);
         manager._solarPanel2 = PlayerPrefs.GetInt("_solarPanel2", manager._solarPanel2);
+
+
     }
 
     //SAVE PROGRESS
@@ -70,6 +72,7 @@ public class SaveLoadProgress : MonoBehaviour
         PlayerPrefs.SetInt("_micro", manager._micro);
         PlayerPrefs.SetInt("_solarPanel1", manager._solarPanel1);
         PlayerPrefs.SetInt("_solarPanel2", manager._solarPanel2);
+
         PlayerPrefs.Save();
     }
 }
