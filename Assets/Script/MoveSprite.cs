@@ -8,6 +8,7 @@ public class MoveSprite : MonoBehaviour
     private Vector3 currentTarget;
     public float speed = 5f;
     public Text textToDisplay;
+    public GameObject mineStone;
 
     public void StartMove()
     {
@@ -18,13 +19,13 @@ public class MoveSprite : MonoBehaviour
             if (currentTarget == endPoint.position)
             {
                 textToDisplay.text = "-1";
-                Invoke("ResetText", 0.3f);
+                Invoke("ResetText", 0.15f);
                 currentTarget = startPoint.position;
             }
             else
             {
                 textToDisplay.text = "+1";
-                Invoke("ResetText", 0.3f);
+                Invoke("ResetText", 0.15f);
                 currentTarget = endPoint.position;
             }
         }

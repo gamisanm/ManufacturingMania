@@ -9,6 +9,8 @@ public class Manager : MonoBehaviour
 
     public MoveSprite ms;
 
+
+
     //ads
     public static Manager S;
     [SerializeField] private float _persentShowAds;
@@ -94,6 +96,8 @@ public class Manager : MonoBehaviour
         {"solarPanel1", 4000},
         {"solarPanel2", 5000},
     };
+
+    
 
     void Update()
     {
@@ -373,16 +377,13 @@ public class Manager : MonoBehaviour
             return number.ToString();
         }
     }
-    //ADDS
 
-    //private void Start()
-    //{
-    //    InterstitialAd.S.LoadAd();
-    //}
+    //adds
     //private void Awake()
     //{
     //    S = this;
-    //}
+    //}  
+    //InterstitialAd.S.LoadAd();
 
     //float tempPersent = Random.Range(0f, 1f);
     //if (tempPersent < _persentShowAds)
@@ -595,6 +596,7 @@ public class Manager : MonoBehaviour
     private void Add_stoneMove()
     {
         ms.StartMove();
+        ms.mineStone.SetActive(true);
     }
     private void Add_coal()
     {
