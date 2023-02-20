@@ -10,26 +10,33 @@ public class MoveSprite : MonoBehaviour
     public Text textToDisplay;
     public GameObject mineStone;
 
+    private bool hasStarted = false;
+
     public void StartMove()
     {
-        transform.position = Vector2.MoveTowards(transform.position, currentTarget, speed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, currentTarget) < 0.1f)
+        if (!hasStarted)
         {
-            if (currentTarget == endPoint.position)
+            hasStarted = true;
+            transform.position = Vector2.MoveTowards(transform.position, currentTarget, speed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, currentTarget) < 0.1f)
             {
-                textToDisplay.text = "-1";
-                Invoke("ResetText", 0.15f);
-                currentTarget = startPoint.position;
-            }
-            else
-            {
-                textToDisplay.text = "+1";
-                Invoke("ResetText", 0.15f);
-                currentTarget = endPoint.position;
+                if (currentTarget == endPoint.position)
+                {
+                    textToDisplay.text = "-1";
+                    Invoke("ResetText", 0.15f);
+                    currentTarget = startPoint.position;
+                }
+                else
+                {
+                    textToDisplay.text = "+1";
+                    Invoke("ResetText", 0.15f);
+                    currentTarget = endPoint.position;
+                }
             }
         }
     }
+
 
     private void ResetText()
     {
